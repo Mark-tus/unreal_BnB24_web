@@ -55,37 +55,7 @@ $(document).ready(function(){
           window.location.replace("login.html");
       }
       });
-      $('#employee_form').validate({
-        debug: false,
-        rules: {
-          fname: {
-            required: true,
-            maxlength: 32,
-          },
-          lname:{
-            required: true,
-            maxlength: 32,
-          },
-          role: {
-            required: true,
-            maxlength: 32,
-          },
-          salary: {
-            required: true,
-            number: true,
-            min: 0,
-          },
-          tax_pin:{
-            required: true,
-            maxlength: 20,  
-          }
-        },
-        messages: {
-          salary:{
-              min: "Invalid salary amount",
-          }
-        },
-      });
+
       $('#equipment_form').validate({
         debug: false,
         rules: {
