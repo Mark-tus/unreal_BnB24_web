@@ -212,39 +212,6 @@ $(document).ready(function(){
 
   }
 
-  function getEmployee(){
-    var uid = getUser();
-    /*GET EMPLOYEE DATA */
-    var keys = 0;
-    var tbodyRef = document.getElementById('employee').getElementsByTagName('tbody')[0];
-    tbodyRef.replaceChildren();
-    firebase.database().ref("employee").child(uid).child('/').once('value', function(snapshot){
-      snapshot.forEach(function(childSnap){
-        var childKey = childSnap.key;
-        var childdat = childSnap.val();
-
-        var row = tbodyRef.insertRow(keys);
-
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
-        var cell6 = row.insertCell(5);
-
-        cell1.innerHTML = "<div class='font-weight-bold'>"+childdat['first_name']+"</div>";
-        cell2.innerHTML = "<div class='font-weight-bold'>"+childdat['last_name']+"</div>";
-        cell3.innerHTML = "<div class='font-weight-medium'>"+childdat['role']+"</div>";
-        cell4.innerHTML = "<div class='font-weight-bold'>"+childdat['tax_pin']+"</div>";
-        cell5.innerHTML = "<div class='font-weight-medium'>"+childdat['salary']+"</div>";
-        cell6.innerHTML = `<div><button class="btn btn-sm btn-danger" value="${childKey}" onclick="delete_employee_record(this.value);">Delete</button></div>`;
-
-        keys = keys +1;
-
-      });
-
-    });
-  }
 
 document.getElementById("equipment_form").addEventListener('submit', function(e) {
     e.preventDefault();
@@ -275,50 +242,6 @@ document.getElementById("equipment_form").addEventListener('submit', function(e)
               icon: "success",
             });
             getData();
-
-          }).catch((error)=> {
-            swal({
-                title: "Error",
-                text: error.message,
-                icon: "error",
-            })
-          })
-        }
-    });
-});
-
-document.getElementById("employee_form").addEventListener('submit', function(e) {
-    e.preventDefault();
-    //if the form is valid
-    $("#employee_form").submit(function () {
-        if ($(this).valid()) { 
-                     //prevent double submissions
-        if($(this).data === "sumitted"){
-            e.preventDefault();
-        }else{
-            $(this).data = "submitted";
-        }
-        const form = document.getElementById('employee_form'); 
-        var fname = document.getElementById('fname').value;
-        var lname = document.getElementById('lname').value;
-        var role = document.getElementById('role').value;
-        var tax_pin = document.getElementById('tax_pin').value;
-        var salary = document.getElementById('salary').value;
-        var uid = getUser();
-        form.reset();
-        firebase.database().ref("employee").child(uid).push({
-            first_name: fname,
-            last_name: lname,
-            role: role,
-            salary: salary,
-            tax_pin: tax_pin,
-        }).then(function(response){
-            swal({
-              title: "Employee Details Saved!",
-              text: "View details in the table below",
-              icon: "success",
-            });
-            getEmployee();
 
           }).catch((error)=> {
             swal({
@@ -380,26 +303,6 @@ function delete_equipment_record(record_id){
             icon: "success",
         });
         getData();
-    })
-    .catch((error)=> {
-        swal({
-            title: "Error",
-            text: error.message,
-            icon: "error",
-        })
-      });
-}
-
-function delete_employee_record(record_id){
-    var uid = getUser();
-    firebase.database().ref("employee").child(uid).child(record_id).remove()
-    .then(function(response){
-        swal({
-            title: "Record Deletion",
-            text: "Status: completed",
-            icon: "success",
-        });
-        getEmployee();
     })
     .catch((error)=> {
         swal({

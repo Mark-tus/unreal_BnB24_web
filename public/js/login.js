@@ -3,14 +3,13 @@
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
-    apiKey: "AIzaSyAycvCsKb5nFuuatKIpXbi2Vk3DklS93-0",
-    authDomain: "mkoolima-782e6.firebaseapp.com",
-    databaseURL: "https://mkoolima-782e6-default-rtdb.firebaseio.com",
-    projectId: "mkoolima-782e6",
-    storageBucket: "mkoolima-782e6.appspot.com",
-    messagingSenderId: "1028380163016",
-    appId: "1:1028380163016:web:06b7f2e1acc2e8fd165efd",
-    measurementId: "G-6KT3WN11FC"
+    apiKey: "AIzaSyA6FDqHq9Ea0PS53yt3pN8XLtNCN4wtuc8",
+    authDomain: "inventory-management-farming.firebaseapp.com",
+    projectId: "inventory-management-farming",
+    storageBucket: "inventory-management-farming.appspot.com",
+    messagingSenderId: "478125174152",
+    appId: "1:478125174152:web:4f123dd7b4c3137934de3d",
+    measurementId: "G-SRGKLM8XN9"
   };
 
   // Initialize Firebase
