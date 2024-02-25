@@ -134,55 +134,6 @@ $(document).ready(function(){
     });
   }
 
-  function getTasks() {
-        var uid = getUser();
-          /*GET TASKS DATA */
-          var keys = 0;
-          var todolist = document.getElementById('todolist');
-          todolist.replaceChildren();
-
-          firebase.database().ref("todo").child(uid).child('/').once('value', function(snapshot){
-            snapshot.forEach(function(childSnap){
-              var childKey = childSnap.key;
-        
-              var childdat = childSnap.val();    
-      
-              var li = document.createElement("li");
-              var div = document.createElement("div");
-              var lbl = document.createElement("label");
-              var inp = document.createElement("input");
-              var i = document.createElement("i");
-              var sp = document.createElement("span");
-      
-              if ((childdat['task_status'].localeCompare("done"))==0) {
-                li.setAttribute('class','completed');
-              }
-      
-              div.setAttribute('class','form-check form-check-flat form-check-label');
-              inp.setAttribute('class','checkbox');
-              inp.setAttribute('type','checkbox');
-              inp.setAttribute('id', childKey);
-              inp.setAttribute('onclick', `update_task("${childKey}");`);
-              sp.appendChild(document.createTextNode(childdat['task_name']));
-              i.setAttribute('class', 'fas fa-1x fa-times');
-              
-              i.setAttribute('onclick', `delete_task("${childKey}");`);
-              div.appendChild(inp);
-      
-              div.appendChild(sp);
-              li.appendChild(div);
-              li.appendChild(i);
-              todolist.appendChild(li);
-      
-              keys = keys +1;
-      
-            });
-      
-          });
-
-  }
-
-
 document.getElementById("equipment_form").addEventListener('submit', function(e) {
     e.preventDefault();
     //if the form is valid
@@ -282,7 +233,54 @@ function delete_equipment_record(record_id){
         })
       });
 }
+//To Do
+function getTasks() {
+  var uid = getUser();
+    /*GET TASKS DATA */
+    var keys = 0;
+    var todolist = document.getElementById('todolist');
+    todolist.replaceChildren();
 
+    firebase.database().ref("todo").child(uid).child('/').once('value', function(snapshot){
+      snapshot.forEach(function(childSnap){
+        var childKey = childSnap.key;
+  
+        var childdat = childSnap.val();    
+
+        var li = document.createElement("li");
+        var div = document.createElement("div");
+        var lbl = document.createElement("label");
+        var inp = document.createElement("input");
+        var i = document.createElement("i");
+        var sp = document.createElement("span");
+
+        if ((childdat['task_status'].localeCompare("done"))==0) {
+          li.setAttribute('class','completed');
+        }
+
+        div.setAttribute('class','form-check form-check-flat form-check-label');
+        inp.setAttribute('class','checkbox');
+        inp.setAttribute('type','checkbox');
+        inp.setAttribute('id', childKey);
+        inp.setAttribute('onclick', `update_task("${childKey}");`);
+        sp.appendChild(document.createTextNode(childdat['task_name']));
+        i.setAttribute('class', 'fas fa-1x fa-times');
+        
+        i.setAttribute('onclick', `delete_task("${childKey}");`);
+        div.appendChild(inp);
+
+        div.appendChild(sp);
+        li.appendChild(div);
+        li.appendChild(i);
+        todolist.appendChild(li);
+
+        keys = keys +1;
+
+      });
+
+    });
+
+}
 function delete_task(record_id){
     var uid = getUser();
 
