@@ -15,7 +15,7 @@
 
      // camera is set at an angle and is focused on Nairobi
 
-     center: [36.82142, -1.28549], // starting position [lng, lat]
+     center: [74, 19.5], // starting position [lng, lat]
 
         //disabled because users may find the bearing difficult to remove
         // it looks nice though for a navigation style map
